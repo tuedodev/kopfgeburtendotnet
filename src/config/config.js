@@ -49,4 +49,4 @@ let today = new Date();
 export const WEBSITE_PATH = `${process.env.GATSBY_SITEMETADATA_SITEURL}`;
 export const WEBSITE_OWNER = `${process.env.GATSBY_SITEMETADATA_OWNER}`;
 export const FOOTER_TEXT = `\u00A9 ${WEBSITE_OWNER} ${today.getFullYear()}`;
-export const SOCIAL_MEDIA_LINK_FB = `${process.env.GATSBY_SITEMETADATA_SITEURL}`;
+export const SOCIAL_MEDIA_LINK_FB = `${process.env.GATSBY_SOCIAL_MEDIA_LINK_FB}`;

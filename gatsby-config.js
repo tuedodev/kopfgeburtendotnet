@@ -21,6 +21,12 @@ module.exports = {
     url: "http://dev-mysite.com",
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: `kopfgeburtendotnet`,
+      },
+    },
     `gatsby-plugin-sass`,
     `gatsby-image`,
     {

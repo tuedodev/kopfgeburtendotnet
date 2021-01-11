@@ -513,18 +513,6 @@ figure > .kg-img-caption {
   }
 }
 
-// Cookie-Consent (Experimental)
-// Fallback
-.kg-cookie-consent {
-  z-index: 9999;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 65%;
-  height: 350px;
-  border-radius: 0.25rem;
-}
 // About
 .about-styling {
   & p {

@@ -16,13 +16,12 @@ const Layout = ({ children, metaData, location }) => {
 
   return (
     <>
-      <MyCookieBanner />
       <SEO metaData={metaData} location={location}/>
       <header>
+        <MyCookieBanner />
         <Navbar />
       </header>
       <div className="container-fluid">
-        <div className="row"></div>
         <div className="row justify-content-center">
           <div className="main-container col-lg-8 col-md-10 col-sm-11 col-12">
             <main>{children}</main>
