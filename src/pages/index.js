@@ -106,13 +106,13 @@ export default function Home({data, location}) {
 
   return (
     <Layout metaData={metaData} location={location}>
-      <div style={{display:'grid', gridTemplateColumns:'2fr 1fr', gridTemplateRows: '2fr 1fr'}}>
-        <div style={{gridArea:'1 / 1 / 2 / 2', display:'flex',alignItems:'center', justifyContent:'center'}}>
-          <div style={{display:'grid', gridTemplateColumns:'minmax(320px, 65%)'}}><Logo linked={false}/></div>
+      <div className="kg-hero">
+        <div className="kg-hero-logo-container">
+          <div className="logo-wrapper"><Logo linked={false}/></div>
         </div>
-        <div style={{gridArea:'2 / 2 / 3 / 3'}}><h1>{GATSBY_SITEMETADATA_TITLE}</h1><h2>{GATSBY_SITEMETADATA_SUBTITLE}</h2></div>
+        <div className="kg-hero-titles"><h1>{GATSBY_SITEMETADATA_TITLE}</h1><h2>{GATSBY_SITEMETADATA_SUBTITLE}</h2></div>
       </div>
-      <div className="mb-4" style={{display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))'}}>
+      <div className="kg-teaser-container mb-4">
       {teaser && 
         teaser.map((tease, index)=>{
           let item = tease.referenceToPandA;
