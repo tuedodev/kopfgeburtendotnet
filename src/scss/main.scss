@@ -180,13 +180,15 @@ main {
       width: 100%;
       z-index: 1;
       overflow: hidden;
-      max-height: 450px;
+      min-height: 450px;
+      max-height: 600px;
       transition: transform ease-in-out 0.2s;
       border-radius: 0.25rem;
 
       & .featured-image-img {
         transition: transform ease-in-out 0.25s, opacity ease-in-out 0.25s;
         opacity: 0.85;
+        height: 100%;
       }
 
       &:hover {
@@ -250,7 +252,14 @@ main {
 .kg-teaser-container {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+// Aktuelles List Container
+.aktuelles-list-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
 // Article
@@ -535,7 +544,7 @@ figure > .kg-img-caption {
 .single-project {
   & .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-template-rows: 1fr;
     gap: 1rem;
     padding: 1rem;

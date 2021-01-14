@@ -20,7 +20,7 @@ export default {
               source: 'title',
               maxLength: 200, // will be ignored if slugify is set
               slugify: input =>
-                input.toLowerCase().replace(/\s+/g, '-').replace(/\u00e4/g, "ae").replace(/\u00f6/g, "oe").replace(/\u00fc/g, "ue").replace(/\u00df/g, "ss").slice(0, 200),
+                input.toLowerCase().replace(/\s+/g, '-').replace(/\u00e4/g, "ae").replace(/\u00f6/g, "oe").replace(/\u00fc/g, "ue").replace(/\u00df/g, "ss").replace(/[^a-zA-Z0-9\-]|\s+/g, "").slice(0, 200),
             },
             validation: Rule => Rule.required().error('Slug ist Pflichtfeld'),
         },

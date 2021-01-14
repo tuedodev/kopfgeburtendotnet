@@ -1,7 +1,5 @@
 import React from "react"
-//import { Link } from "gatsby"
 import Logo from "./Logo.js"
-//import "bootstrap/dist/js/bootstrap.min.js"
 import { NAVBAR } from "../config/config"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
@@ -35,9 +33,8 @@ const Navbar = () => {
                           {NAVBAR.map((item) => {
                             return (
                                 <li className={'nav-item'} key={item.key}>
-                                    {/*<Link to={'/' + item.routing + '/'} className={item.className}>{item.title}</Link>*/}
                                     <AniLink fade duration={0.4} to={'/' + item.routing + '/'} className={item.className}>
-                                    {item.title}
+                                        {item.title}
                                     </AniLink>
                                 </li>
                               );

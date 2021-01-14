@@ -1,42 +1,22 @@
 import React from 'react'
-import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import { graphql } from "gatsby"
 import Datestring from "../components/Datestring"
-//import RichText from "../components/RichText"
 import Image from "gatsby-image"
 import CardHeaderBanner from "../components/CardHeaderBanner"
+import Pagination from "../components/Pagination"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import getImageUrl  from '../utils/getImageUrl'
 
 export const query = graphql`
-  {
-    aktuelles: allSanityAktuelles {
+query getAllAktuelles($limit: Int!, $skip: Int!) {
+    aktuelles_all: allSanityAktuelles(limit: $limit, skip: $skip) {
         nodes {
           _id
-          title
-          slug{
-            current
-          }
-          intro
-          user {
-            _id
-            email
-            name
-            nickname
-            thumbnail {
-              asset {
-                fixed(width: 50, height:50) {
-                    ...GatsbySanityImageFixed
-                }
-              }
-            }
-          }
-          datum
-          publishedAt
           featuredImage {
             image {
               asset {
-                fixed: fixed(width: 800) {
+                fixed500: fixed(width: 500) {
                     ...GatsbySanityImageFixed
                 }
                 fluid {
@@ -49,8 +29,67 @@ export const query = graphql`
             caption
             showCaption
           }
+          slug {
+            current
+          }
+          publishedAt
+          title
+          intro
+          datum
+          publishedAt
+          user {
+            email
+            name
+            nickname
+            thumbnail {
+              asset {
+                fixed(width: 50, height: 50) {
+                    ...GatsbySanityImageFixed
+                }
+              }
+            }
+          }
+          furtherFotos {
+            image {
+              asset {
+                fixed(width: 120) {
+                    ...GatsbySanityImageFixed
+                }
+                fluid {
+                    ...GatsbySanityImageFluid
+                }
+                _id
+              }
+            }
+            alt
+            caption
+            showCaption
+          }
+          _key
           raw_content: _rawContent(resolveReferences: {maxDepth: 10})
+          metadata {
+            description: metaDescription
+            keywords: metaKeywords
+            title: metaTitle
+          }
         }
+      }
+    getDefaultImage: allSanitySettings (limit: 1) {
+      nodes {
+        defaultImage {
+          image {
+            asset {
+              fixed(width: 1200) {
+                ...GatsbySanityImageFixed
+              }
+              _id
+            }
+          }
+          alt
+          caption
+          showCaption
+        }
+      }
     }
     metadata: allSanityStaticSite(filter: {staticSiteSlug: {current: {eq: "aktuelles"}}}, limit: 1) {
         nodes {
@@ -62,16 +101,20 @@ export const query = graphql`
             publishedAt: staticSitePublishedAt
         }
     }
-}
+  }
 `
-const aktuelles = ({ data, location }) => {
-    const aktuelles = data.aktuelles.nodes
+
+const aktuellesListTemplate = ({ data, location, pageContext}) => {
+    const currentPage = pageContext.currentPage
+    const numPages = pageContext.numPages
+    const aktuelles = data.aktuelles_all.nodes
     const image = getImageUrl(aktuelles[0].featuredImage.image.asset)
-    const metaData = {...data.metadata.nodes[0].metadata, ...{publishedAt: data.metadata.nodes[0].publishedAt}, ...{image: image}}
-        
+    const site_metadata = data.metadata.nodes[0].metadata
+    const metadata = site_metadata && Object.keys(site_metadata).length > 0 ? {...site_metadata, ...{publishedAt: data.metadata.nodes[0].publishedAt}, ...{image: image},  ...{title:`${site_metadata.title} - Seite ${currentPage}`}}:{}
+    
     return (
-        <Layout metaData={metaData} location={location}>
-                <div className="mt-5 mb-4" style={{display:'grid', gap:'2rem', gridTemplateColumns:'repeat(auto-fit, minmax(400px, 1fr))'}}>
+        <Layout metaData={metadata} location={location}>
+                <div className="aktuelles-list-container mt-5 mb-4">
                     {aktuelles.map(aktuell=>{
                         return (<div className="card shadow" key={aktuell._id}>
                             <CardHeaderBanner title={aktuell.title} to={"/aktuelles/" + aktuell.slug.current} />
@@ -102,8 +145,9 @@ const aktuelles = ({ data, location }) => {
                         </div>)
                     })}
                 </div>
+                <Pagination path="aktuelles" currentPage={currentPage} numPages={numPages} />
         </Layout>
     )
 }
 
-export default aktuelles
+export default aktuellesListTemplate

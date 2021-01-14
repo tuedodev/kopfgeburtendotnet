@@ -2,6 +2,12 @@ export default {
   name: "settings",
   title: "Settings",
   type: "document",
+  initialValue: {
+    aktuellesIsPaginated: true,
+    aktuellesItemsPerPage: 7,
+    projectsIsPaginated: true,
+    projectsItemsPerPage: 7,
+  },
   fields: [
     {
       name: "websiteTitle",
@@ -30,8 +36,28 @@ export default {
     {
       name: "teaser",
       title: "Teaser (Seite 1)",
-      type: 'array',
-      of: [{ type: 'unionProjectAktuelles' }],
+      type: "array",
+      of: [{ type: "unionProjectAktuelles" }],
+    },
+    {
+      name: "aktuellesIsPaginated",
+      title: "Rubrik Aktuelles: Liste wird paginiert",
+      type: "boolean",
+    },
+    {
+      name: "aktuellesItemsPerPage",
+      title: "Rubrik Aktuelles: Anzahl der Listeneinträge",
+      type: "number",
+    },
+    {
+      name: "projectsIsPaginated",
+      title: "Rubrik Arbeiten: Liste wird paginiert",
+      type: "boolean",
+    },
+    {
+      name: "projectsItemsPerPage",
+      title: "Rubrik Arbeiten: Anzahl der Listeneinträge",
+      type: "number",
     },
     {
       name: "publishedAt",

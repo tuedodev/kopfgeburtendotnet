@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Captcha from "./Captcha"
@@ -133,7 +134,7 @@ export default class ContactForm extends Component{
               <div className="form-check mb-3">
                 <input type="checkbox" name="privacy" className={"form-check-input" + renderValidationClasses({touched:touched.privacy, errors:errors.privacy, valid: 'is-valid', invalid: 'is-invalid'})} id="privacy" onChange={handleChange} onBlur={handleBlur} value={values.privacy} aria-describedby="val_feedback_privacy"/>
                 <label className="form-check-label" htmlFor="privacy">
-                    Die <Link to="/datenschutz/" aria-current="page" style={{textDecoration:'none'}}>Hinweise zum Datenschutz</Link> habe ich gelesen und stimme ihnen hiermit zu.
+                    Die <AniLink fade duration={0.4} to="/datenschutz/" aria-current="page" style={{textDecoration:'none'}}>Hinweise zum Datenschutz</AniLink> habe ich gelesen und stimme ihnen hiermit zu.
                 </label>
                 <div id="val_feedback_privacy" className={"val_feedback" + renderValidationClasses({touched:touched.privacy, errors:errors.privacy, valid: 'valid-feedback', invalid: 'invalid-feedback'})}>
                     {touched.privacy && errors.privacy ? <span>{errors.privacy}</span> : <span>&nbsp;</span>}
@@ -164,30 +165,6 @@ export default class ContactForm extends Component{
                   </div>
                 </div>
               </div>
-              {/*<div className="row g-2">
-                <div className="col-4 col-md-4 col-lg-2">
-                  <div className="input-group mb-3">
-                    <Captcha className="shadow" ref={this.captchaChild} callbackOnChange={this.handleCaptchaOnChange.bind(this)}/>
-                  </div>
-                </div>
-                <div className="col-4 col-md-5 col-lg-8">
-                  <div className="form-floating mb-3">
-                    <input type="text" className={"form-control shadow" + renderValidationClasses({touched:touched.captcha_input, errors:errors.captcha_input, valid: 'is-valid', invalid: 'is-invalid'})} name="captcha_input" placeholder="" aria-label="Captcha Input" onChange={handleChange} onBlur={handleBlur} value={values.captcha_input} aria-describedby="val_feedback_captcha"/> 
-                    <label htmlFor="captcha_input">Bitte geben Sie hier die Lösung ein</label>
-                    <div id="val_feedback_captcha" className={"val_feedback" + renderValidationClasses({touched:touched.captcha_input, errors:errors.captcha_input, valid: 'valid-feedback', invalid: 'invalid-feedback'})}>
-                      {touched.captcha_input && errors.captcha_input ? <span>{errors.captcha_input}</span> : <span>&nbsp;</span>}
-                    </div>
-                  </div>
-                </div>
-                  <div className="col-4 col-md-3 col-lg-2">
-                    <div className="input-group mb-3">
-                      <button type="submit" className="btn btn-primary mb-4" disabled={isSubmitting}>
-                        Senden
-                      </button>
-                    </div>
-                  </div>
-              </div>*/}
-      
               <Field type="hidden" className="form-control" name="kg_tme" />
             </Form>
        )}

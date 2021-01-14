@@ -95,7 +95,7 @@ export default function Home({data, location}) {
   const teaser = data.teaserQuery.nodes[0].teaser
   const site = data.site.nodes[0] || {}
   const image = data.getDefaultImage.nodes[0].defaultImage.image.asset || null;
-  const metaData = Object.keys(site).length > 0 ? {...site.metadata, ...{publishedAt: site.publishedAt}, ...{image: image}}:{}
+  const metaData = site && Object.keys(site).length > 0 ? {...site.metadata, ...{publishedAt: site.publishedAt}, ...{image: image}}:{}
   const ArticleIntro = ({intro}) => {
     return (
       <div className="kg-card-text-container mt-3">
@@ -143,7 +143,7 @@ export default function Home({data, location}) {
                 
               </div>
               <div className="kg-card-footer d-flex justify-content-center">
-                 <AniLink fade duration={0.4} to={getUrl(item.slug.current, item._type)} className="btn btn-primary btn-lg my-3" type="button">
+                  <AniLink fade duration={0.4} to={getUrl(item.slug.current, item._type)} className="btn btn-primary btn-lg my-3" type="button">
                    {item._type==='aktuelles'?'Mehr lesen':'Mehr schauen'}
                   </AniLink>
               </div>

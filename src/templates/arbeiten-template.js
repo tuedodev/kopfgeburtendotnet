@@ -63,7 +63,7 @@ const arbeitenTemplate = ({data, location}) => {
     const {project} = data
     const defaultImage = data.getDefaultImage.nodes[0].defaultImage.image.asset || null;
     const image = project.paintings[0].image.asset || defaultImage;
-    const metaData = Object.keys(project.metadata).length > 0 ? {...project.metadata, ...{publishedAt: project.publishedAt}, ...{image: image}}:{}
+    const metaData = project.metadata && Object.keys(project.metadata).length > 0 ? {...project.metadata, ...{publishedAt: project.publishedAt}, ...{image: image}}:{}
     let modalCarouselID = `modal-carousel-1`;
 
     return (

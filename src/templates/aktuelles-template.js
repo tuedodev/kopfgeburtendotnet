@@ -93,7 +93,7 @@ const aktuellesTemplate = ({data, location}) => {
     const aktuell = data.aktuelles;
     const defaultImage = data.getDefaultImage.nodes[0].defaultImage.image.asset || null;
     const image = aktuell.featuredImage.image.asset || defaultImage
-    const metaData = Object.keys(aktuell.metadata).length > 0 ? {...aktuell.metadata, ...{publishedAt: aktuell.publishedAt}, ...{image: image}}:{}
+    const metaData = aktuell.metadata && Object.keys(aktuell.metadata).length > 0 ? {...aktuell.metadata, ...{publishedAt: aktuell.publishedAt}, ...{image: image}}:{}
     
     return (
         <>

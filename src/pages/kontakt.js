@@ -38,7 +38,7 @@ export const query = graphql`
 const kontakt = ({ data, location }) => {
   const site = data.site.nodes[0] || {}
   const image = data.getDefaultImage.nodes[0].defaultImage.image.asset || null;
-  const metaData = Object.keys(site).length > 0 ? {...site.metadata, ...{publishedAt: site.publishedAt}, ...{image: image}}:{}
+  const metaData = site && Object.keys(site).length > 0 ? {...site.metadata, ...{publishedAt: site.publishedAt}, ...{image: image}}:{}
 
   return (
     <Layout metaData={metaData} location={location}>
